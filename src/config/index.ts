@@ -17,7 +17,7 @@ const basic = {
   // 获取当前的工作环境
   env: process.env.NODE_ENV || Enviornment.development,
   // 端口
-  port: 9119,
+  port: 8989,
   // token 加密参数
   tokenSecrect: 'sadkasasdzxc',
   // token 有效期

@@ -40,7 +40,7 @@ export class HttpBaseError extends HttpException {
           error: '',
         },
         defaultRes,
-        res,
+        args[0],
       )
     }
     super(res, defaultStatus || HttpStatus.INTERNAL_SERVER_ERROR)

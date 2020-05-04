@@ -22,14 +22,6 @@ export class UserEntity extends BaseEntity {
   @Column({
     length: 128,
     nullable: false,
-    comment: '用户密码，暂时明文保存',
-  })
-  password: string
-
-  @Exclude()
-  @Column({
-    length: 128,
-    nullable: false,
     comment: '算法加密后的用户密码',
   })
   hashPassword: string
@@ -48,6 +40,13 @@ export class UserEntity extends BaseEntity {
     comment: '用户手机号码',
   })
   tel?: string
+
+  @Column({
+    length: 60,
+    nullable: true,
+    comment: '用户邮箱号',
+  })
+  email?: string
 
   @ManyToMany(
     () => RoleEntity,

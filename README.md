@@ -1,75 +1,165 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# nest-start 快速开发代码
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 介绍
 
-## Description
+基于 nestjs + typeorm + mysql + redis 编写的后端快速开发代码 （附 docker-compose 配置）
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+拥有错误拦截、jwt权限校验、参数校验等封装
 
-## Installation
+已简单开发 权限、角色、用户 等模块
+
+本项目使用 fastify 底层框架而非 express，如需后者，请按照 [nestjs 官方文档](https://docs.nestjs.com/techniques/performance#performance-fastify)替换
+
+## 运行项目
+
+### 没有 yarn 先安装 yarn
 
 ```bash
-$ npm install
+npm i yarn -g
 ```
 
-## Running the app
+### 第一步，进入目录安装依赖
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+yarn install
 ```
 
-## Test
+### 第二步，启动项目
 
 ```bash
-# unit tests
-$ npm run test
+# 开发环境
+yarn run start:dev
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# 生产环境
+yarn run start:prod
 ```
 
-## Support
+## 打包
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+yarn run build
+```
 
-## Stay in touch
+## 开发
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 请使用 yarn 安装其他包，不要使用 npm
 
-## License
+```bash
+yarn add 包名
+```
 
-  Nest is [MIT licensed](LICENSE).
+## 如果想快速开发，可以装好 docker ，然后进入本项目 docker 文件夹执行
+
+```bash
+# 开启 docker 环境
+docker-compose up -d
+
+# 关闭 docker 环境
+docker-compose down
+```
+
+## 相关目录说明
+
+```basic
+nest-start
+|   dist （打包项目生成的文件夹）
+|   docker （docker 相关 文件夹）
+|     |
+|     └───docker-mysql（mysql 相关）
+|     |     |
+|     |     └───conf (mysql 配置)
+|     |     |
+|     |     └───data（mysql 数据）
+|     |     |
+|     |     └───init（mysql 初始化语句）
+|     |
+|     └───docker-redis (redis 相关）
+|     |     |
+|     |     └───conf (redis 配置)
+|     |     |
+|     |     └───data（redis 数据）
+|     |
+|     └───.env (docker-compose 环境变量)
+|     |
+|     └───docker-compose.yml (docker-compose 配置)
+|
+|   src（主要代码区）
+|     |
+|     └───config (存放配置文件)
+|     |     |
+|     |     └───development.ts (开发环境配置)
+|     |     |
+|     |     └───production.ts (生产环境配置)
+|     |     |
+|     |     └───test.ts (测试环境配置)
+|     |     |
+|     |     └───index.ts (配置出口)
+|     |
+|     └───constants（存放常量)
+|     |     |
+|     |     └───meta.constant.ts（存放一些 redis key 和 reflect meta key）
+|     |     |
+|     |     └───text.constant.ts（存放一些文字常量）
+|     |
+|     └───decorators（自定义装饰器）
+|     |     |
+|     |     └───guard.decorator.ts（权限装饰器）
+|     |     |
+|     |     └───http.decorator.ts（响应装饰器）
+|     |  
+|     └───entities（存放数据表实体类，也就是数据模型）
+|     |
+|     └───enums（存放枚举类型）
+|     |
+|     └───errors（存放自定义错误构造器）
+|     |
+|     └───filters（存放全局错误过滤器）
+|     |     |
+|     |     └───error.filter.ts（用于重封装全局错误）
+|     |
+|     └───guards（存放守卫）
+|     |     |
+|     |     └───permission.guards.ts（权限守卫，配合权限装饰器用）
+|     |
+|     └───helper（助手工具）
+|     |     |
+|     |     └───cache（存放 redis 缓存模块）
+|     |     |
+|     |     └───common（常用函数)
+|     |           |
+|     |           └───common.controller.ts（常用控制器，其他控制器一般继承这个）
+|     |           |
+|     |           └───common.service.ts（常用服务，其他服务一般继承这个）
+|     |           |
+|     |           └───common.dto.ts（常用 dto）
+|     |
+|     └───interceptor（拦截器）
+|     |     |
+|     |     └───error.interceptor.ts（错误拦截器）
+|     |     |
+|     |     └───log.interceptor.ts（日志拦截器)
+|     |     |
+|     |     └───transform.interceptor.ts（响应转换拦截器，配合响应装饰器用)
+|     |
+|     └───interfaces（存放类型、接口）
+|     |
+|     └───middlewares（存放中间件）
+|     |     |
+|     |     └───decodeToken.middleware.ts（用于 token 解析的中间件）
+|     |
+|     └───modules（功能模块、主体）
+|     |     |
+|     |     └───user（用户模块）
+|     |     |
+|     |     └───role（角色模块）
+|     |     |
+|     |     └───permission（权限模块）
+|     |     |
+|     |     └───auth（权限认证模块，主要是 token 相关，登录、注册）
+|     |     |
+|     |     └───weixin（微信模块）
+|     |
+└─────────pipes（管道）
+            |
+            └───validate-dto.pipe.ts（数据类型自动转换为 dto 定义的类型）
+```

@@ -1,56 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger'
-import {HttpMessage, HttpError} from '@app/interfaces'
-import {ServiceCode, Sort} from '@app/enums'
-import * as TEXT from '@app/constants/text.constant'
-import {isNumber} from 'lodash'
 import {IsNotEmpty, IsArray, IsOptional, IsEnum, Length, IsNumber} from 'class-validator'
-
-const serviceCodes: number[] = []
-const valueIsNumber = (value: unknown): value is number => isNumber(value)
-for (const key in ServiceCode) {
-  const value = ServiceCode[key]
-  valueIsNumber(value) && serviceCodes.push(value)
-}
-
-export abstract class HttpResBaseDto {
-  code: ServiceCode
-  message: HttpMessage
-  error: HttpError
-}
-
-export class HttpResSuccessDto extends HttpResBaseDto {
-  @ApiModelProperty({
-    description: '业务逻辑码',
-    default: ServiceCode.SUCCESS,
-    type: Number,
-  })
-  code: ServiceCode
-
-  @ApiModelProperty({description: '响应消息', type: String, default: TEXT.HTTP_DEFAULT_SUCCESS_TEXT})
-  message: HttpMessage
-
-  @ApiModelProperty({description: '响应错误', type: String, default: ''})
-  error: HttpError
-
-  @ApiModelProperty({description: '响应成功主体', type: String, default: ''})
-  result: unknown
-}
-
-export class HttpResErrorDto extends HttpResBaseDto {
-  @ApiModelProperty({
-    description: '业务逻辑错误码',
-    enum: serviceCodes,
-    default: ServiceCode.ERROR,
-    type: Number,
-  })
-  code: ServiceCode
-
-  @ApiModelProperty({description: '响应消息', type: String, default: TEXT.HTTP_DEFAULT_ERROR_TEXT})
-  message: HttpMessage
-
-  @ApiModelProperty({description: '响应错误', type: String})
-  error: HttpError
-}
+import {Sort} from '@app/enums'
 
 export class FindByPropertyDto {
   @IsNotEmpty({message: '属性名不能为空'})

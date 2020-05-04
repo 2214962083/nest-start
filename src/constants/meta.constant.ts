@@ -16,3 +16,8 @@ export const HTTP_DECORATOR_ERROR_MESSAGE = 'http_decorator_error_message'
 
 // http 装饰器 errorStatus 的 meta key
 export const HTTP_DECORATOR_ERROR_STATUS = 'http_decorator_error_status'
+
+// redis key 列表
+
+// redis 登录验证码存储 key
+export const REDIS_VERIFICATION_CODE = 'verification_code'

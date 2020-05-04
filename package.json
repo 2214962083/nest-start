@@ -4,6 +4,7 @@
   "description": "",
   "author": "",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -40,7 +41,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.5",
-    "typeorm": "^0.2.24"
+    "typeorm": "^0.2.24",
+    "unique-names-generator": "^4.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.13.2",

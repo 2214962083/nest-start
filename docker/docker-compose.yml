@@ -1,0 +1,51 @@
+version: '2.1'
+services:
+  mysql:
+    image: mysql:5.7.26
+    container_name: nest_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: nest_123456
+      MYSQL_USER: nest
+      MYSQL_PASSWORD: nest_123456
+    volumes:
+      - ${DOCKER_PATH:-.}/docker-mysql/data:/var/lib/mysql
+      - ${DOCKER_PATH:-.}/docker-mysql/conf/my.cnf/:/etc/my.cnf
+      - ${DOCKER_PATH:-.}/docker-mysql/init:/docker-entrypoint-initdb.d/
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    restart: always
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:3306"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 5
+
+  #数据库管理面板
+  phpmyadmin:
+    image: 'phpmyadmin/phpmyadmin'
+    container_name: nest_phpmyadmin
+    depends_on:
+      - mysql
+    links:
+      - mysql:mysql
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+    expose:
+      - 80
+    ports:
+      - '9090:80'
+    restart: always
+
+  redis:
+    image: redis
+    container_name: nest_redis
+    command: redis-server --requirepass nest_123456
+    ports:
+      - 6379:6379
+    volumes:
+      - ${DOCKER_PATH:-.}/docker-redis/conf:/usr/local/etc/redis/redis.conf
+      - ${DOCKER_PATH:-.}/docker-redis/data:/data

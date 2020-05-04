@@ -3,6 +3,7 @@
  */
 export enum Permission {
   ROOT = 'root',
+  NORMAL = 'normal',
   ROLE_MANAGER = 'role_manager',
   PERMISSION_MANAGER = 'permission_manager',
 }
