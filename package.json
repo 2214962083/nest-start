@@ -41,7 +41,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.5",
-    "typeorm": "^0.2.24",
+    "typeorm": "^0.2.25",
     "unique-names-generator": "^4.2.0"
   },
   "devDependencies": {
